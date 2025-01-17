@@ -241,8 +241,9 @@ class Chess:
                 min_y, max_y = min(y, ny), max(y, ny)
                 # 统计中间是否只有一个棋子
                 num_pieces = sum(1 for cachey in range(min_y + 1, max_y) if chessboard[(x, cachey)] != "none")
+
                 # 列举出（x,y）和（x,ny）之间的坐标
-                for cachey in list(range(y, ny)):
+                for cachey in list(range(y + 1, ny)) if y > ny else list(range(ny + 1, y)):
                     # 如果中间没棋子
                     if chessboard[(x, cachey)] == "none":
                         # 如果新位置是空的
@@ -307,7 +308,7 @@ class Chess:
                 # 统计中间是否只有一个棋子
                 num_pieces = sum(1 for cachex in range(min_x + 1, max_x) if chessboard[(cachex, y)] != "none")
                 # 列举出（x,y）和（nx,y）之间的坐标
-                for cachex in list(range(x, nx)):
+                for cachex in list(range(x + 1, nx)) if x > nx else list(range(nx + 1, x)):
                     # 如果中间没棋子
                     if chessboard[(x, cachex)] == "none":
                         # 如果新位置是空的
@@ -386,7 +387,7 @@ class Chess:
                 # 统计中间是否只有一个棋子
                 num_pieces = sum(1 for cachey in range(min_y + 1, max_y) if chessboard[(x, cachey)] != "none")
                 # 列举出（x,y）和（x,ny）之间的坐标
-                for cachey in list(range(y, ny)):
+                for cachey in list(range(y + 1, ny)) if y > ny else list(range(ny + 1, y)):
                     # 如果中间没棋子
                     if chessboard[(x, cachey)] == "none":
                         # 如果新位置是空的
@@ -451,7 +452,7 @@ class Chess:
                 # 统计中间是否只有一个棋子
                 num_pieces = sum(1 for cachex in range(min_x + 1, max_x) if chessboard[(cachex, y)] != "none")
                 # 列举出（x,y）和（nx,y）之间的坐标
-                for cachex in list(range(x, nx)):
+                for cachex in list(range(x + 1, nx)) if x > nx else list(range(nx + 1, x)):
                     # 如果中间没棋子
                     if chessboard[(x, cachex)] == "none":
                         # 如果新位置是空的
@@ -525,7 +526,7 @@ class Chess:
             # 检查是否垂直移动
             if x == nx and y != ny:
                 # 列举出（x,y）和（x,ny）之间的坐标
-                for cachey in list(range(y, ny)):
+                for cachey in list(range(y + 1, ny)) if y > ny else list(range(ny + 1, y)):
                     print(x, cachey)
                     # 如果中间没棋子
                     if chessboard[(x, cachey)] == "none":
@@ -562,7 +563,7 @@ class Chess:
             # 检查是否水平移动
             elif x != nx and y == ny:
                 # 列举出（x,y）和（nx,y）之间的坐标
-                for cachex in list(range(x, nx)):
+                for cachex in list(range(x + 1, nx)) if x > nx else list(range(nx + 1, x)):
                     # 如果中间没棋子
                     if chessboard[(cachex, y)] == "none":
                         # 如果目标位置有黑棋
@@ -612,7 +613,7 @@ class Chess:
             # 检查是否垂直移动
             if x == nx and y != ny:
                 # 列举出（x,y）和（x,ny）之间的坐标
-                for cachey in list(range(y, ny)):
+                for cachey in list(range(y + 1, ny)) if y > ny else list(range(ny + 1, y)):
                     print(x, cachey)
                     # 如果中间没棋子
                     if chessboard[(x, cachey)] == "none":
@@ -647,7 +648,7 @@ class Chess:
             # 检查是否水平移动
             elif x != nx and y == ny:
                 # 列举出（x,y）和（nx,y）之间的坐标
-                for cachex in list(range(x, nx)):
+                for cachex in list(range(x + 1, nx)) if x > nx else list(range(nx + 1, x)):
                     # 如果中间没棋子
                     if chessboard[(cachex, y)] == "none":
                         # 如果目标位置有红棋
