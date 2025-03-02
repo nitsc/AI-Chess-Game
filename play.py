@@ -1,101 +1,150 @@
-import pygame, sys
-sys.path.append("D:\\chinesechess")
-from settings import chessboard, piece_name_map, Operate
+# < 作者：八 18 班周伟安 >
+# < 笔名：Data Infintai Eterni >
+# < 邮箱：dministrator1st1234567890dddaz@outlook.com >
+# < 邮箱：zhoukreanto@gmail.com >
 
-# 初始化pygame
+import pathlib
+import secrets
+import pygame
+from settings import chessboard
+from settings import Operate
+from settings import AI
+
+# 获取当前文件路径
+current_path = pathlib.Path(__file__).parent
+
+# 获取字体路径
+font_path = current_path / "fonts" / "SIMLI.TTF"
+
+# 设置网格线的颜色和宽度
+grid_color = (6, 3, 1)
+grid_width = 3
+
+# 设置网格的大小
+grid_size = 100         # 网格单元的大小
+
+# 初始化 Pygame
 pygame.init()
 
-# 棋盘参数
-SCREEN_WIDTH, SCREEN_HEIGHT = 800, 900  # 屏幕大小
-CELL_SIZE = 80  # 棋盘单元格大小
-MARGIN = 50  # 棋盘边距
-SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Chinese Chess")
+# 设置窗口大小
+screen = pygame.display.set_mode((1000, 1100))
 
-# 颜色定义
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-
-# 颜色映射
-color_map = {
-    True: RED,  # 红色
-    False: BLACK  # 黑色
-}
+# 设置窗口标题
+pygame.display.set_caption("AI 中国象棋")
 
 # 加载字体
-FONT = pygame.font.SysFont("simhei", 40)  # 使用中文字体
+font = pygame.font.Font(font_path, 80)
 
-# 绘制棋盘
+# 设置背景颜色
+background_color = (239, 188, 84)
+screen.fill(background_color)
+
+# 创建文字表面
+text = font.render("楚河      汉界", True, (0, 0, 0))
+text_rect = text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
+
+# 定义绘制棋盘的函数
 def draw_board():
-    SCREEN.fill(WHITE)
+     screen.fill(background_color)
+     # 绘制水平网格线（10条线对应9个格子）
+     for y in range(0, 10 * grid_size, grid_size):
+          pygame.draw.line(screen, grid_color, (0, y), (screen.get_width(), y), grid_width)
+     # 绘制垂直网格线（9条线对应8个格子）
+     for x in range(0, 9 * grid_size, grid_size):
+          pygame.draw.line(screen, grid_color, (x, 0), (x, screen.get_height()), grid_width)
+     # 绘制棋子
+     for (x, y), value in chessboard.items():
+          if value != 'none':
+               draw_x = y * grid_size + 65         # 调整为列坐标，偏移居中
+               draw_y = x * grid_size + 65         # 调整为行坐标，偏移居中
+               color, kind = value
+               if color:         # 红方
+                    if kind == 'car':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_rl1.svg.png")
+                    elif kind == 'horse':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_hl1.svg.png")
+                    elif kind == 'elephant':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_el1.svg.png")
+                    elif kind == 'officer':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_al1.svg.png")
+                    elif kind == 'captain':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_gl1.svg.png")
+                    elif kind == 'soldier':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_sl1.svg.png")
+                    elif kind == 'cannon':
+                        piece_image = pygame.image.load(current_path / "images" / "Xiangqi_cl1.svg.png")
+               if not color:         # 黑方
+                    if kind == 'car':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_rd1.svg.png")
+                    elif kind == 'horse':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_hd1.svg.png")
+                    elif kind == 'elephant':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_ed1.svg.png")
+                    elif kind == 'officer':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_ad1.svg.png")
+                    elif kind == 'captain':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_gd1.svg.png")
+                    elif kind == 'soldier':
+                         piece_image = pygame.image.load(current_path / "images" / "Xiangqi_sd1.svg.png")
+                    elif kind == 'cannon':
+                        piece_image = pygame.image.load(current_path / "images" / "Xiangqi_cd1.svg.png")
+               screen.blit(piece_image, (draw_x, draw_y))
+     # 绘制文字
+     screen.blit(text, text_rect)
+     pygame.display.flip()
 
-    # 绘制网格
-    for row in range(10):
-        y = MARGIN + row * CELL_SIZE
-        pygame.draw.line(SCREEN, BLACK, (MARGIN, y), (MARGIN + 8 * CELL_SIZE, y), 2)
+# 实例化 Operate 和 AI
+operate = Operate()
+ai = AI()
 
-    for col in range(9):
-        x = MARGIN + col * CELL_SIZE
-        pygame.draw.line(SCREEN, BLACK, (x, MARGIN), (x, MARGIN + 9 * CELL_SIZE), 2)
+# 随机决定先手
+decider = 0
+current_player = "user" if decider == 0 else "ai"
+clicks = []
 
-    # 绘制河界
-    river_text = FONT.render("楚河     汉界", True, BLACK)
-    SCREEN.blit(river_text, (MARGIN + 2.5 * CELL_SIZE, MARGIN + 4.5 * CELL_SIZE - 20))
+# 初始绘制棋盘
+draw_board()
 
-# 绘制棋子
-def draw_pieces():
-    for (pos, piece) in chessboard.items():
-        x, y = pos
-        center_x = MARGIN + y * CELL_SIZE
-        center_y = MARGIN + x * CELL_SIZE
+# 游戏主循环
+running = True
+while running:
+     for event in pygame.event.get():
+          if event.type == pygame.QUIT:
+               running = False
+          elif event.type == pygame.MOUSEBUTTONDOWN and current_player == "user":
+               mouse_x, mouse_y = pygame.mouse.get_pos()
+               grid_x = round(mouse_x / grid_size) - 1
+               grid_y = round(mouse_y / grid_size) - 1
+               clicks.append((grid_y, grid_x))         # (行, 列)
+               if len(clicks) == 2:
+                    (x, y), (nx, ny) = clicks
+                    print("拾起棋子坐标:", (x, y))
+                    print("释放棋子坐标:", (nx, ny))
+                    status = operate.user_move(x, y, nx, ny)
+                    if status == "CONTINUE":
+                         current_player = "ai"
+                         clicks = []
+                    elif status == "RESELECT":
+                         clicks = []         # 重新选择
+                         print("请重新选择有效的移动")
+                    else:
+                         print("状态码异常:", status)
 
-        if piece != 'none':
-            color, name = piece
-            piece_color = color_map[color]
-            pygame.draw.circle(SCREEN, piece_color, (center_x, center_y), CELL_SIZE // 3)
-            text = FONT.render(piece_name_map[name], True, WHITE)
-            text_rect = text.get_rect(center=(center_x, center_y))
-            SCREEN.blit(text, text_rect)
+     if current_player == "ai":
+          while True:
+               x, y, nx, ny = ai.zhipuai()
+               status = operate.ai_move(x, y, nx, ny)
+               if status == "CONTINUE":
+                    current_player = "user"
+                    break
+               elif status == "RESELECT":
+                    continue
+               else:
+                    print("AI 状态码异常:", status)
+                    break
 
-# 获取点击的棋盘坐标
-def get_board_position(mouse_pos):
-    x, y = mouse_pos
-    col = (x - MARGIN) // CELL_SIZE
-    row = (y - MARGIN) // CELL_SIZE
-    if 0 <= col < 9 and 0 <= row < 10:
-        return row, col
-    return None
+     # 每次循环结束时绘制棋盘
+     draw_board()
 
-# 主循环
-def main():
-    clock = pygame.time.Clock()
-    running = True
-    selected_piece = None
-    first_click = None
-
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # 左键单击
-                    board_pos = get_board_position(event.pos)
-                    if board_pos:
-                        if first_click is None:
-                            first_click = board_pos
-                            print(f"第一次单击位置: {first_click}")
-                        else:
-                            print(f"第二次单击位置: {board_pos}")
-                            Operate.move(first_click[0], first_click[1], board_pos[0], board_pos[1])
-                            first_click = None
-        draw_board()
-        draw_pieces()
-        pygame.display.flip()
-        clock.tick(30)
-
-    pygame.quit()
-
-if __name__ == "__main__":
-    main()
+# 退出 Pygame
+pygame.quit()
