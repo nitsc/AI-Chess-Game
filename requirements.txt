@@ -1,0 +1,4 @@
+pygame~=2.6.1
+ollama~=0.4.6
+zhipuai~=2.1.5.20250106
+setuptools~=68.2.0
