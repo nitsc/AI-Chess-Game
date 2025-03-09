@@ -3,7 +3,7 @@ import sys
 import ollama
 from zhipuai import ZhipuAI
 
-from src import key
+import key
 
 # 以 (0,0) 为左上角，黑方在上，红方在下的中国象棋初始布局
 chessboard = {(0, 0):(False, "car"), (1, 0):(False, "horse"), (2, 0):(False, "elephant"), (3, 0):(False, "officer"), (4, 0):(False, "captain"), (5, 0):(False, "officer"), (6, 0):(False, "elephant"), (7, 0):(False, "horse"), (8, 0):(False, "car"),
@@ -1508,7 +1508,6 @@ class AI:
             ],
         )
         locations = response.choices[0].message.content.split(",")
-        print(response)
         x, y, nx, ny = int(locations[0]), int(locations[1]), int(locations[2]), int(locations[3])
 
         self.operate.ai_move(x, y, nx, ny)
