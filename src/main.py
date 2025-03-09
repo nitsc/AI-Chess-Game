@@ -2,7 +2,6 @@ from gui import CNChessGame
 
 if __name__ == "__main__":
     print('''
-        # < 作者：八 18 班 周伟安 >
         # < 笔名：Data Infintai Eterni >
         # < Github：https://github.com/nitsc >
         # < 邮箱：dministrator1st1234567890dddaz@outlook.com >
