@@ -23,7 +23,7 @@
 ## 📌 环境要求  
 
 - **Python 3.11+** 🐍  
-- **PyCharm**（建议从 PyCharm PE  运行，避免意外问题）💻  
+- **PyCharm**（建议从 PyCharm Pro  运行，避免意外问题）💻  
 - **Python 依赖**（`requirements.txt`）📦  
 
 ---
@@ -69,7 +69,7 @@ ollama pull deepseek-r1:14b
 ## 🎭 玩法说明  
 
 🖱️ **单击拾起棋子，第二次单击放下**  
-📖 规则参考 [象棋百科](https://zh.wikibooks.org/wiki/%E4%B8%AD%E5%9C%8B%E8%B1%A1%E6%A3%8B)  
+📖 规则参考 [象棋百科](https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9C%8B%E8%B1%A1%E6%A3%8B)  
 📽️ 可观看示例视频 (`示例使用.mp4`)  
 
 ---

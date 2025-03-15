@@ -1,0 +1,58 @@
+<h3>AI Chess Game 🎮🤖</h3>
+<p><a href="https://github.com/nitsc/AI-Chess-Game">📦 GitHub 仓库</a></p>
+<p>🔥 <strong>一款支持与本地 DeepSeek R1:14B 🐋 和 API ChatGLM4-PLUS 🐘 对弈的象棋游戏！</strong> 提供精美图形界面、丰富音效，带来沉浸式 AI 对弈体验！🎨🎵</p>
+<blockquote>
+<p>⚠️ <strong>小提醒</strong>：</p>
+<ul>
+<li>语言模型可能会走错棋，请不要频繁调用或尝试窃取 API Key 🛑</li>
+<li><strong>无法获取更多免费的 API Key</strong>（OpenAI 可能不错，但需要信用卡💳）</li>
+<li><strong>长时间无法走棋？</strong> 重新运行程序！</li>
+<li><strong>分数显示异常？</strong> 请查看命令行输出 🖥️</li>
+</ul>
+</blockquote>
+<hr>
+<h2>🌟 特色功能</h2>
+<p>🧠 <strong>AI 对弈</strong> - 支持 DeepSeek R1:14B 和 ChatGLM4-PLUS 🔥<br>
+🎨 <strong>直观图形界面</strong> - 通过 <code>gui.py</code> 提供流畅操作体验 💡<br>
+🎲 <strong>精美棋盘 &amp; 棋子</strong> - 高质量视觉设计 🖼️<br>
+🎵 <strong>内置音效</strong> - 让对局更具氛围 🎶</p>
+<hr>
+<h2>📌 环境要求</h2>
+<ul>
+<li><strong>Python 3.11+</strong> 🐍</li>
+<li><strong>PyCharm</strong>（建议从 PyCharm Pro  运行，避免意外问题）💻</li>
+<li><strong>Python 依赖</strong>（<code>requirements.txt</code>）📦</li>
+</ul>
+<hr>
+<h2>🚀 安装与运行</h2>
+<h3>🪟 Windows 用户</h3>
+<p>1️⃣ <strong>安装依赖</strong></p>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt
+</span></code></pre>
+<p>2️⃣ <strong>运行游戏</strong></p>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">python src/main.py
+</span></code></pre>
+<p>3️⃣ <strong>选择模式</strong>（推荐 <strong>选项 1</strong>）🔢</p>
+<hr>
+<h2>🐑 使用 Ollama 运行 DeepSeek R1 14B</h2>
+<p>如果想使用 <strong>Ollama 本地推理</strong>（不仅限于 DeepSeek R1:14B 🐋，可修改 <code>logic.py</code> 实现 AI）</p>
+<p>1️⃣ <a href="https://ollama.com/">🔗 下载 Ollama</a> 并安装 📥<br>
+2️⃣ 启动 Ollama 服务</p>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">ollama serve
+</span></code></pre>
+<p>3️⃣ 拉取 DeepSeek R1 14B 模型（可替换为其他模型, 但需要修改源代码）🚀</p>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">ollama pull deepseek-r1:14b
+</span></code></pre>
+<p>4️⃣ 运行游戏 🎮<br>
+5️⃣ <strong>选择选项 2</strong> 🔢</p>
+<p>🎯 <strong>然后就可以通过 PyGame 窗口，与 AI 进行一场精彩对弈！😊</strong></p>
+<hr>
+<h2>🎭 玩法说明</h2>
+<p>🖱️ <strong>单击拾起棋子，第二次单击放下</strong><br>
+📖 规则参考 <a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9C%8B%E8%B1%A1%E6%A3%8B">象棋百科</a><br>
+📽️ 可观看示例视频 (<code>示例使用.mp4</code>)</p>
+<hr>
+<h2>📜 许可证</h2>
+<p>本项目基于 <strong>GNU General Public License v3.0</strong> 许可协议 📄<br>
+详情请查阅 <code>LICENSE</code> 文件</p>
+<p>💖 <strong>欢迎 Star ⭐ 支持项目，Enjoy！🎉</strong></p>
