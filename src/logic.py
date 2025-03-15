@@ -3,8 +3,6 @@ import sys
 import ollama
 from zhipuai import ZhipuAI
 
-import key
-
 # 以 (0,0) 为左上角，黑方在上，红方在下的中国象棋初始布局
 chessboard = {(0, 0):(False, "car"), (1, 0):(False, "horse"), (2, 0):(False, "elephant"), (3, 0):(False, "officer"), (4, 0):(False, "captain"), (5, 0):(False, "officer"), (6, 0):(False, "elephant"), (7, 0):(False, "horse"), (8, 0):(False, "car"),
               (0, 1): None, (1, 1): None, (2, 1): None, (3, 1): None, (4, 1): None, (5, 1): None, (6, 1): None, (7, 1): None, (8, 1): None,
@@ -1094,7 +1092,7 @@ class Operate:
         for pos, (is_red, piece) in chessboard.items():
             if piece == "captain" and is_red:
                 return True  # 红方的将还在
-        print("红方将领被吃掉！游戏结束！")
+        print("红方将领被吃掉！你失败了！再接再厉！")
         return False  # 红方的将已经被吃掉
 
     @staticmethod
@@ -1103,7 +1101,7 @@ class Operate:
         for pos, (is_red, piece) in chessboard.items():
             if piece == "captain" and not is_red:
                 return True  # 黑方的将还在
-        print("黑方将领被吃掉！游戏结束！")
+        print("黑方将领被吃掉！恭喜你胜利了！")
         return False  # 黑方的将已经被吃掉
 
     # 红方
@@ -1111,6 +1109,13 @@ class Operate:
         """判断坐标并调用 Chess类 的 对应函数"""
         def report():
             print(f"红方: {red_score}分, 黑方: {black_score}分")
+
+        def check():
+            succeed = self.check_black_captain(chessboard)
+            if succeed is False:
+                return "RED-WIN"
+            else:
+                return "CONTINUE"
 
         # 判断棋子类型
         if chessboard[(x, y)] is None:
@@ -1128,12 +1133,11 @@ class Operate:
                     elif message == "CAP-BLACK":
                         print("红方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("移动成功！")
                         report()
                         return "CONTINUE"
-                    self.check_black_captain(chessboard)
 
                 # 判断棋子颜色
                 elif not chessboard[(x, y)][0]:
@@ -1152,7 +1156,7 @@ class Operate:
                     elif message == "CAP-BLACK":
                         print("红方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("移动成功！")
                         report()
@@ -1161,7 +1165,6 @@ class Operate:
                         print("拌马脚！")
                         report()
                         return "RESELECT"
-                    self.check_black_captain(chessboard)
 
                 # 判断棋子颜色
                 elif not chessboard[(x, y)][0]:
@@ -1180,7 +1183,7 @@ class Operate:
                     elif message == "CAP-BLACK":
                         print("红方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("移动成功！")
                         report()
@@ -1189,7 +1192,6 @@ class Operate:
                         print("拌象脚！")
                         report()
                         return "RESELECT"
-                    self.check_black_captain(chessboard)
 
                 # 判断棋子颜色
                 elif not chessboard[(x, y)][0]:
@@ -1208,12 +1210,11 @@ class Operate:
                     elif message == "CAP-BLACK":
                         print("红方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("移动成功！")
                         report()
                         return "CONTINUE"
-                    self.check_black_captain(chessboard)
 
                 # 判断棋子颜色
                 elif not chessboard[(x, y)][0]:
@@ -1232,12 +1233,10 @@ class Operate:
                     elif message == "CAP-BLACK":
                         print("红方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("移动成功！")
                         report()
-                        return "CONTINUE"
-                    self.check_black_captain(chessboard)
 
                 # 判断棋子颜色
                 elif not chessboard[(x, y)][0]:
@@ -1256,12 +1255,11 @@ class Operate:
                     elif message == "CAP-BLACK":
                         print("红方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("移动成功！")
                         report()
                         return "CONTINUE"
-                    self.check_black_captain(chessboard)
 
                 # 判断棋子颜色
                 elif not chessboard[(x, y)][0]:
@@ -1280,12 +1278,11 @@ class Operate:
                     elif message == "CAP-BLACK":
                         print("红方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("移动成功！")
                         report()
                         return "CONTINUE"
-                    self.check_black_captain(chessboard)
 
                 # 判断棋子颜色
                 elif not chessboard[(x, y)][0]:
@@ -1297,6 +1294,13 @@ class Operate:
         """判断坐标并调用 Chess类 的 对应函数"""
         def report():
             print(f"红方: {red_score}分, 黑方: {black_score}分")
+
+        def check():
+            succeed = self.check_red_captain(chessboard)
+            if succeed is False:
+                return "BLACK-WIN"
+            else:
+                return "CONTINUE"
 
         # 判断棋子类型
         if chessboard[(x, y)] is None:
@@ -1319,12 +1323,11 @@ class Operate:
                     elif message == "CAP-RED":
                         print("AI 黑方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("AI 移动成功！")
                         report()
                         return "CONTINUE"
-                    self.check_red_captain(chessboard)
 
             elif chessboard[(x, y)][1] == "horse":
                 # 判断棋子颜色
@@ -1343,7 +1346,7 @@ class Operate:
                     elif message == "CAP-RED":
                         print("AI 黑方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("AI 移动成功！")
                         report()
@@ -1352,7 +1355,6 @@ class Operate:
                         print("AI 拌马脚！")
                         report()
                         return "RESELECT"
-                    self.check_red_captain(chessboard)
 
             elif chessboard[(x, y)][1] == "elephant":
                 # 判断棋子颜色
@@ -1371,7 +1373,7 @@ class Operate:
                     elif message == "CAP-RED":
                         print("AI 黑方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("AI 移动成功！")
                         report()
@@ -1380,7 +1382,6 @@ class Operate:
                         print("AI 拌象脚！")
                         report()
                         return "RESELECT"
-                    self.check_red_captain(chessboard)
 
             elif chessboard[(x, y)][1] == "officer":
                 # 判断棋子颜色
@@ -1399,12 +1400,11 @@ class Operate:
                     elif message == "CAP-RED":
                         print("AI 黑方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("AI 移动成功！")
                         report()
                         return "CONTINUE"
-                    self.check_red_captain(chessboard)
 
             elif chessboard[(x, y)][1] == "captain":
                 # 判断棋子颜色
@@ -1423,12 +1423,11 @@ class Operate:
                     elif message == "CAP-RED":
                         print("AI 黑方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("AI 移动成功！")
                         report()
                         return "CONTINUE"
-                    self.check_red_captain(chessboard)
 
             elif chessboard[(x, y)][1] == "cannon":
                 # 判断棋子颜色
@@ -1447,12 +1446,11 @@ class Operate:
                     elif message == "CAP-RED":
                         print("AI 黑方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("AI 移动成功！")
                         report()
                         return "CONTINUE"
-                    self.check_red_captain(chessboard)
 
             elif chessboard[(x, y)][1] == "soldier":
                 # 判断棋子颜色
@@ -1471,7 +1469,7 @@ class Operate:
                     elif message == "CAP-RED":
                         print("AI 黑方加一分！")
                         report()
-                        return "CONTINUE"
+                        check()
                     elif message == "MOVED":
                         print("AI 移动成功！")
                         report()
@@ -1484,7 +1482,7 @@ class Operate:
             
 class AI:
     def __init__(self):
-        self.api_key = key.get_api_key()
+        self.api_key = "694fb78c7d664c3fbb2bc724dcd4caf1.4YZNwUHUdEXT7r7z"
         self.operate = Operate()
 
     def zhipuai(self):
@@ -1493,18 +1491,9 @@ class AI:
             model="glm-4-plus",
             messages=[
                 {"role": "system",
-                 "content": '''你是一个象棋手, 根据我跟你的棋局状况字典(初始棋局: {(0, 0):(False, "car"), (1, 0):(False, "horse"), (2, 0):(False, "elephant"), (3, 0):(False, "officer"), (4, 0):(False, "captain"), (5, 0):(False, "officer"), (6, 0):(False, "elephant"), (7, 0):(False, "horse"), (8, 0):(False, "car"),
-              (0, 1): None, (1, 1): None, (2, 1): None, (3, 1): None, (4, 1): None, (5, 1): None, (6, 1): None, (7, 1): None, (8, 1): None,
-              (0, 2): None, (1, 2): (False, "cannon"), (2, 2): None, (3, 2): None, (4, 2): None, (5, 2): None, (6, 2): None, (7, 2): (False, "cannon"), (8, 2): None,
-              (0, 3): (False, "soldier"), (1, 3): None, (2, 3): (False, "soldier"), (3, 3): None, (4, 3): (False, "soldier"), (5, 3): None, (6, 3): (False, "soldier"), (7, 3): None, (8, 3): (False, "soldier"),
-              (0, 4): None, (1, 4): None, (2, 4): None, (3, 4): None, (4, 4): None, (5, 4): None, (6, 4): None, (7, 4): None, (8, 4): None,
-              (0, 5): None, (1, 5): None, (2, 5): None, (3, 5): None, (4, 5): None, (5, 5): None, (6, 5): None, (7, 5): None, (8, 5): None,
-              (0, 6): (True, "soldier"), (1, 6): None, (2, 6): (True, "soldier"), (3, 6): None, (4, 6): (True, "soldier"), (5, 6): None, (6, 6): (True, "soldier"), (7, 6): None, (8, 6): (True, "soldier"),
-              (0, 7): None, (1, 7): (True, "cannon"), (2, 7): None, (3, 7): None, (4, 7): None, (5, 7): None, (6, 7): None, (7, 7): (True, "cannon"), (8, 7): None,
-              (0, 8): None, (1, 8): None, (2, 8): None, (3, 8): None, (4, 8): None, (5, 8): None, (6, 8): None, (7, 8): None, (8, 8): None,
-              (0, 9):(True, "car"), (1, 9):(True, "horse"), (2, 9):(True, "elephant"), (3, 9):(True, "officer"), (4, 9):(True, "captain"), (5, 9):(True, "officer"), (6, 9):(True, "elephant"), (7, 9):(True, "horse"), (8, 9):(True, "car")}, True 是红棋, False 是黑棋), 给出下一步的走法(你是黑方; 回答格式: x,y,nx,ny),x和y是原来棋子的坐标,nx和ny是新位置的坐标,不需要任何解释。'''},
+                 "content": "你是一个象棋手, 根据我跟你的棋局状况字典(True 是红棋, False 是黑棋), 给出下一步的走法(你是黑方; 回答格式: x,y,nx,ny),x和y是原来棋子的坐标,nx和ny是新位置的坐标,不需要任何解释. "},
                 {"role": "user",
-                 "content": f"棋局状况(True 是红棋, False 是黑棋): {chessboard}, 给出下一步的走法(回答格式: x,y,nx,ny),其中x和y是原来棋子的坐标,nx和ny是新位置的坐标,注意规则,不需要任何解释。"}
+                 "content": f"棋局状况(True 是红棋, False 是黑棋): {chessboard}, 给出下一步的走法(回答格式: x,y,nx,ny),其中x和y是原来棋子的坐标,nx和ny是新位置的坐标,注意规则,不需要任何解释. "}
             ],
         )
         locations = response.choices[0].message.content.split(",")
@@ -1518,18 +1507,9 @@ class AI:
         res = ollama.chat(
             model="deepseek-r1:14bb", stream=False, messages=[
                 {"role": "system",
-                 "content": '''你是一个象棋手, 根据我跟你的棋局状况字典(初始棋局: {(0, 0):(False, "car"), (1, 0):(False, "horse"), (2, 0):(False, "elephant"), (3, 0):(False, "officer"), (4, 0):(False, "captain"), (5, 0):(False, "officer"), (6, 0):(False, "elephant"), (7, 0):(False, "horse"), (8, 0):(False, "car"),
-              (0, 1): None, (1, 1): None, (2, 1): None, (3, 1): None, (4, 1): None, (5, 1): None, (6, 1): None, (7, 1): None, (8, 1): None,
-              (0, 2): None, (1, 2): (False, "cannon"), (2, 2): None, (3, 2): None, (4, 2): None, (5, 2): None, (6, 2): None, (7, 2): (False, "cannon"), (8, 2): None,
-              (0, 3): (False, "soldier"), (1, 3): None, (2, 3): (False, "soldier"), (3, 3): None, (4, 3): (False, "soldier"), (5, 3): None, (6, 3): (False, "soldier"), (7, 3): None, (8, 3): (False, "soldier"),
-              (0, 4): None, (1, 4): None, (2, 4): None, (3, 4): None, (4, 4): None, (5, 4): None, (6, 4): None, (7, 4): None, (8, 4): None,
-              (0, 5): None, (1, 5): None, (2, 5): None, (3, 5): None, (4, 5): None, (5, 5): None, (6, 5): None, (7, 5): None, (8, 5): None,
-              (0, 6): (True, "soldier"), (1, 6): None, (2, 6): (True, "soldier"), (3, 6): None, (4, 6): (True, "soldier"), (5, 6): None, (6, 6): (True, "soldier"), (7, 6): None, (8, 6): (True, "soldier"),
-              (0, 7): None, (1, 7): (True, "cannon"), (2, 7): None, (3, 7): None, (4, 7): None, (5, 7): None, (6, 7): None, (7, 7): (True, "cannon"), (8, 7): None,
-              (0, 8): None, (1, 8): None, (2, 8): None, (3, 8): None, (4, 8): None, (5, 8): None, (6, 8): None, (7, 8): None, (8, 8): None,
-              (0, 9):(True, "car"), (1, 9):(True, "horse"), (2, 9):(True, "elephant"), (3, 9):(True, "officer"), (4, 9):(True, "captain"), (5, 9):(True, "officer"), (6, 9):(True, "elephant"), (7, 9):(True, "horse"), (8, 9):(True, "car")}, True 是红棋, False 是黑棋), 给出下一步的走法(你是黑方; 回答格式: x,y,nx,ny),x和y是原来棋子的坐标,nx和ny是新位置的坐标,不需要任何解释。'''},
+                 "content": "你是一个象棋手, 根据我给你的棋局状况字典(True 是红棋, False 是黑棋), 给出下一步的走法(你是黑方; 回答格式: x,y,nx,ny),x和y是原来棋子的坐标,nx和ny是新位置的坐标,不需要任何解释. "},
                 {"role": "user",
-                 "content": f"棋局状况(True 是红棋, False 是黑棋): {chessboard}, 给出下一步的走法(回答格式: x,y,nx,ny),其中x和y是原来棋子的坐标,nx和ny是新位置的坐标,注意规则,不需要任何解释。"}
+                 "content": f"棋局状况(True 是红棋, False 是黑棋): {chessboard}, 给出下一步的走法(回答格式: x,y,nx,ny),其中x和y是原来棋子的坐标,nx和ny是新位置的坐标,注意规则,不需要任何解释. "}
             ],
             options={"temperature": 0})
         locations = res["message"]["content"].split(",")

@@ -1,55 +1,82 @@
-# AI Chess Game 🎮🤖
-### [GitHub 仓库](https://github.com/nitsc/AI-Chess-Game)
+### AI Chess Game 🎮🤖  
+[📦 GitHub 仓库](https://github.com/nitsc/AI-Chess-Game)  
 
-这是一款支持与本地 **DeepSeek R1:14B** 和 API **ChatGLM4-PLUS** 对弈的象棋游戏。游戏提供图形界面、多种玩法和内置音效，带来绝佳的 AI 对弈体验！😊enjoy！
+🔥 **一款支持与本地 DeepSeek R1:14B 🐋 和 API ChatGLM4-PLUS 🐘 对弈的象棋游戏！** 提供精美图形界面、丰富音效，带来沉浸式 AI 对弈体验！🎨🎵  
 
-小注: 语言模型可能会回复错误, 请不要频繁使用甚至尝试窃取我的 key.  我无法找到更多免费的 API Key 了(OpenAI 可能不错，但是我没有信用卡). 分数在 pygame 可能刷新不出来, 请看命令行. 辛苦写了很久的项目, 希望能给高分, 谢谢! 🙏🙏🙏🙇🙇🙇‍
+> ⚠️ **小提醒**：  
+> - 语言模型可能会走错棋，请不要频繁调用或尝试窃取 API Key 🛑  
+> - **无法获取更多免费的 API Key**（OpenAI 可能不错，但需要信用卡💳）  
+> - **长时间无法走棋？** 重新运行程序！  
+> - **分数显示异常？** 请查看命令行输出 🖥️  
 
-## 功能概览 📝
-![img.png](assets/images/img.png)
-- **AI 对弈**：支持 DeepSeek R1:14B 与 ChatGLM4-PLUS 对弈 🤖
-- **图形界面**：通过 `gui.py` 提供简洁易用的界面 🎨
-- **精美棋盘和棋子图片**：丰富视觉体验 🎲
-- **内置音效**：背景音乐增添乐趣 🎵
+---
 
-## 环境要求 📦
+## 🌟 特色功能  
 
-- Python 3.11 及以上版本 🐍
-- PyCharm 专业版 (社区版应该也行，最好从 PyCharm 运行，否则可能会出现找不到模块 src 的问题)
-- 所需 Python 库 (使用 `requirements.txt` 安装）
+🧠 **AI 对弈** - 支持 DeepSeek R1:14B 和 ChatGLM4-PLUS 🔥  
+🎨 **直观图形界面** - 通过 `gui.py` 提供流畅操作体验 💡  
+🎲 **精美棋盘 & 棋子** - 高质量视觉设计 🖼️  
+🎵 **内置音效** - 让对局更具氛围 🎶  
 
-## 安装与使用
+---
 
-### Windows 🪟
+## 📌 环境要求  
 
-1. **安装依赖**  
-   确保安装 Python 3.11+ 后，执行：
-   ```bash
-   pip install -r requirements.txt
-   ```
+- **Python 3.11+** 🐍  
+- **PyCharm**（建议从 PyCharm PE  运行，避免意外问题）💻  
+- **Python 依赖**（`requirements.txt`）📦  
 
-2. **运行游戏**  
-   进入 `src` 文件夹，执行：👍
-   ```bash
-   python src/main.py
-   ```
+---
 
-## Ollama 上的 DeepSeek R1 14B 🐑
-如果你想使用 Ollama 模型 (不仅限 DeepSeek R1 14B, 可修改 logic.py 的 AI 类实现) 
-1. 前往 [OLLAMA](https://ollama.com/)  下载并安装 Ollama 可执行文件 📥
-2. 启动 Ollama 服务 💻
-   ```bash
-   ollama serve
-   ```
-3. 拉取 DeepSeek R1 14B 模型 (请根据需求修改 logic.py 和 命令)  🚚
-   ```bash
-   ollama pull deepseek-r1:14b
-   ```
-4. 运行游戏 🎮
-5. 输入选项 2 🔢
+## 🚀 安装与运行  
 
-运行后，通过 PyGame 窗口即可与 AI 开始精彩对弈！😊😊😊
+### 🪟 Windows 用户  
 
-## 许可证
+1️⃣ **安装依赖**  
+```bash
+pip install -r requirements.txt
+```
 
-本项目采用 GNU General Public License v3.0 许可证，详情请参阅 LICENSE 文件 📄
+2️⃣ **运行游戏**  
+```bash
+python src/main.py
+```
+
+3️⃣ **选择模式**（推荐 **选项 1**）🔢  
+
+---
+
+## 🐑 使用 Ollama 运行 DeepSeek R1 14B  
+
+如果想使用 **Ollama 本地推理**（不仅限于 DeepSeek R1:14B 🐋，可修改 `logic.py` 实现 AI）  
+
+1️⃣ [🔗 下载 Ollama](https://ollama.com/) 并安装 📥  
+2️⃣ 启动 Ollama 服务  
+```bash
+ollama serve
+```
+3️⃣ 拉取 DeepSeek R1 14B 模型（可替换为其他模型, 但需要修改源代码）🚀  
+```bash
+ollama pull deepseek-r1:14b
+```
+4️⃣ 运行游戏 🎮  
+5️⃣ **选择选项 2** 🔢  
+
+🎯 **然后就可以通过 PyGame 窗口，与 AI 进行一场精彩对弈！😊**  
+
+---
+
+## 🎭 玩法说明  
+
+🖱️ **单击拾起棋子，第二次单击放下**  
+📖 规则参考 [象棋百科](https://zh.wikibooks.org/wiki/%E4%B8%AD%E5%9C%8B%E8%B1%A1%E6%A3%8B)  
+📽️ 可观看示例视频 (`示例使用.mp4`)  
+
+---
+
+## 📜 许可证  
+
+本项目基于 **GNU General Public License v3.0** 许可协议 📄  
+详情请查阅 `LICENSE` 文件  
+
+💖 **欢迎 Star ⭐ 支持项目，Enjoy！🎉**

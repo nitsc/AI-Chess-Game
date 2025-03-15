@@ -89,9 +89,12 @@ class CNChessGame:
         print(f"用户选择的原坐标: ({x}, {y}), 用户选择的新坐标: ({nx}, {ny})")
         if status in ("CONTINUE", None):
             self.current_player = "ai"
+            print("轮到 AI 下棋")
             self.draw_board()  # 更新分数后刷新棋盘
         elif status == "RESELECT":
             print("请重新选择有效的移动")
+        elif status == "RED-WIN":
+            pygame.quit()
         else:
             print("状态码异常:", status)
         self.clicks.clear()
@@ -105,6 +108,7 @@ class CNChessGame:
                 status = self.operate.ai_move(x, y, nx, ny)
                 if status in ("CONTINUE", None):
                     self.current_player = "user"
+                    print("轮到 用户 下棋")
                     self.draw_board()  # 更新分数后刷新棋盘
                     break
                 elif status == "RESELECT":
@@ -113,6 +117,8 @@ class CNChessGame:
                         print("AI 尝试次数超过 3 次，停止重试")
                         break
                     break
+                elif status == "BLACK-WIN":
+                    pygame.quit()
             elif ai_way == "2":
                 x, y, nx, ny = self.ai.deepseek()
                 status = self.operate.ai_move(x, y, nx, ny)
@@ -125,6 +131,8 @@ class CNChessGame:
                     if retry_count >= 3:
                         print("AI 尝试次数超过 3 次，停止重试")
                         break
+                elif status == "BLACK-WIN":
+                    pygame.quit()
                 else:
                     print("AI 状态码异常:", status)
                     break
@@ -156,4 +164,3 @@ class CNChessGame:
             self.draw_board()  # 绘制棋盘
             pygame.display.flip()  # 确保刷新显示
         pygame.quit()
-
