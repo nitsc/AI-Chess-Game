@@ -1,0 +1,36 @@
+├── assets
+ ├── fonts
+  ├── msyhbd.ttc
+  ├── SIMLI.TTF
+ ├── images
+  ├── img.png
+  ├── Xiangqi_ad1.svg.png
+  ├── Xiangqi_al1.svg.png
+  ├── Xiangqi_cd1.svg.png
+  ├── Xiangqi_cl1.svg.png
+  ├── Xiangqi_ed1.svg.png
+  ├── Xiangqi_el1.svg.png
+  ├── Xiangqi_gd1.svg.png
+  ├── Xiangqi_gl1.svg.png
+  ├── Xiangqi_hd1.svg.png
+  ├── Xiangqi_hl1.svg.png
+  ├── Xiangqi_rd1.svg.png
+  ├── Xiangqi_rl1.svg.png
+  ├── Xiangqi_sd1.svg.png
+  ├── Xiangqi_sl1.svg.png
+ ├── music
+  ├── background.mp3
+├── src
+ ├── gui.py
+ ├── logic.py
+ ├── main.py
+├── text
+ ├── 注意事项.txt
+ ├── langAnaly.txt
+├── 示例使用.mp4
+├── LICENSE
+├── look_tree.ps1
+├── qodana.yaml
+├── README.html
+├── README.md
+├── requirements.txt
