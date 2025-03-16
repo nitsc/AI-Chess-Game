@@ -92,5 +92,30 @@ ollama pull deepseek-r1:14b
 
 本项目基于 **GNU General Public License v3.0** 许可协议 📄  
 详情请查阅 `LICENSE` 文件  
+---
+
+## GitHub 仓库统计徽章
+
+<!-- GitHub 仓库统计徽章 -->
+<p align="center">
+  <a href="https://github.com/nitsc/AI-Chess-Game">
+    <img src="https://img.shields.io/github/languages/top/nitsc/AI-Chess-Game" alt="Top Language">
+  </a>
+  <a href="https://github.com/nitsc/AI-Chess-Game/stargazers">
+    <img src="https://img.shields.io/github/stars/nitsc/AI-Chess-Game?style=social" alt="Stars">
+  </a>
+  <a href="https://github.com/nitsc/AI-Chess-Game/watchers">
+    <img src="https://img.shields.io/github/watchers/nitsc/AI-Chess-Game?style=social" alt="Watchers">
+  </a>
+  <a href="https://github.com/nitsc/AI-Chess-Game/network/members">
+    <img src="https://img.shields.io/github/forks/nitsc/AI-Chess-Game?style=social" alt="Forks">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/nitsc">
+    <img src="https://img.shields.io/github/followers/nitsc?style=social" alt="Followers">
+  </a>
+</p>
 
 💖 **欢迎 Star ⭐ 支持项目，Enjoy！🎉**  
