@@ -92,6 +92,7 @@ ollama pull deepseek-r1:14b
 
 本项目基于 **GNU General Public License v3.0** 许可协议 📄  
 详情请查阅 `LICENSE` 文件  
+
 ---
 
 ## GitHub 仓库统计徽章
