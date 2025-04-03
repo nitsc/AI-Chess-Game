@@ -1482,7 +1482,7 @@ class Operate:
             
 class AI:
     def __init__(self):
-        self.api_key = "694fb78c7d664c3fbb2bc724dcd4caf1.4YZNwUHUdEXT7r7z"
+        self.api_key = "hidden"
         self.operate = Operate()
 
     def zhipuai(self):
