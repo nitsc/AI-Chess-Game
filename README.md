@@ -29,7 +29,8 @@
 
 - **Python 3.11+** 🐍  
 - **PyCharm**（建议从 PyCharm Pro 运行，避免意外问题）💻  
-- **Python 依赖**（`requirements.txt`）📦  
+- **Python 依赖**（`requirements.txt`）📦
+- **API KEY** (🎁注册赠送2000万tokens体验包](https://www.bigmodel.cn/))
 
 ---
 
